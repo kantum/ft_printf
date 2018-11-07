@@ -16,7 +16,11 @@ int		ft_vfprintf(FILE *restrict stream,
 	t_flags	f;
 
 	ret = 0;
-	f.fd = stream->_fileno; //f.fd = stream->_file; on darwin
+#ifdef __gnu_linux__
+	f.fd = stream->_fileno;
+#elif defined(__APPLE__)
+	f.fd = stream->_file;
+#endif
 	ft_bzero(tmp, BUFFSIZE);
 	while (*format)
 	{

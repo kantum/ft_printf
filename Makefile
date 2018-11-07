@@ -64,13 +64,13 @@ clean:
 	@make -s -C libft clean
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) test
 	@make -s -C libft fclean
 
 re: fclean all
 
 test: $(NAME)
-	@$(CC) $(DIR)/*.c $(HEADERS) $(LIB)
+	@$(CC) $(DIR)/*.c $(HEADERS) $(LIB) -o $@
 	@printf "\r$$(tput setaf 2)$@$$(tput sgr0)\n"
 
-.PHONY: all, clean, fclean, re
+.PHONY: all, clean, fclean, re, test

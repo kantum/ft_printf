@@ -32,17 +32,23 @@ char	*ft_d_precis(t_flags *f, char *fr)
 	char	*ret;
 	char	*tmp;
 
-	i = -1;
+	i = 0;
 	tmp = fr;
 	len = ft_strlen(fr);
-	while(tmp[++i] == '0')
-		len--;
+	while(tmp[i] == '0')
+	{
+		--len;
+		++i;
+	}
 	ret = (char*)malloc(f->prec + 1);
 	ft_bzero(ret, f->prec + 1);
 	ft_memset(ret, '0', f->prec);
 	len = ft_strlen(fr);
-	while (++i < len)
+	while (i < len)
+	{
 		ret[f->prec - len + i] = fr[i];
+		++i;
+	}
 	free(fr);
 	return (ret);
 }
@@ -53,7 +59,7 @@ char	*ft_d_width(t_flags *f, char *fr)
 	size_t	len;
 	char	*ret;
 
-	i = -1;
+	i = 0;
 	len = ft_strlen(fr);
 	ret = (char*)malloc(f->min_w + 1);
 	ft_bzero(ret, f->min_w + 1);
@@ -61,8 +67,11 @@ char	*ft_d_width(t_flags *f, char *fr)
 		ft_memset(ret, '0', f->min_w);
 	else
 		ft_memset(ret, ' ', f->min_w);
-	while (++i < len)
+	while (i < len)
+	{
 		ret[f->min_w - len + i] = fr[i];
+		++i;
+	}
 	free(fr);
 	return (ret);
 }
@@ -116,12 +125,15 @@ int		ft_x(va_list ap, t_flags *f, int down)
 	char	*tmp;
 	int		i;
 
-	i = -1;
+	i = 0;
 	if (down)
 	{
 		tmp = ft_itoa_base(va_arg(ap, int), 16);
-		while (tmp[++i])
+		while (tmp[i])
+		{
 			tmp[i] = ft_tolower(tmp[i]);
+			++i;
+		}
 		return (ft_putbuf(tmp, f->fd));
 	}
 	return (ft_putbuf(ft_itoa_base(va_arg(ap, int), 16), f->fd));
