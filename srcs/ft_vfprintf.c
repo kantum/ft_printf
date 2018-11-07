@@ -16,7 +16,7 @@ int		ft_vfprintf(FILE *restrict stream,
 	t_flags	f;
 
 	ret = 0;
-	f.fd = stream->_file;
+	f.fd = stream->_fileno; //f.fd = stream->_file; on darwin
 	ft_bzero(tmp, BUFFSIZE);
 	while (*format)
 	{

@@ -39,7 +39,6 @@ int		ft_lh(const char *restrict format, t_flags *f)
 int		ft_length(const char *restrict format, t_flags *f)
 {
 	int		i;
-	char	*clen;
 
 	(void)f;
 	i = 0;
@@ -51,7 +50,6 @@ int		ft_length(const char *restrict format, t_flags *f)
 	{
 		++format;
 		++i;
-		clen = "j";
 	}
 	else
 		return (0);
