@@ -16,7 +16,9 @@ int		ft_vfprintf(FILE *restrict stream,
 	t_flags	f;
 
 	ret = 0;
-#ifdef __gnu_linux__
+#ifdef __ANDROID__
+	f.fd = stream->_file;
+#elif defined(__gnu_linux__)
 	f.fd = stream->_fileno;
 #elif defined(__APPLE__)
 	f.fd = stream->_file;
